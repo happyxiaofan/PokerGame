@@ -3,7 +3,6 @@ package com.imooc.pokerGame;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 
 public class PokerAction {
@@ -14,7 +13,6 @@ public class PokerAction {
 	private List<Player> playerList;
 	
 	private Scanner in;
-	private Random ran;
 	
 	public PokerAction(){
 		poker = new Poker();
@@ -25,13 +23,22 @@ public class PokerAction {
 	//添加两名玩家
 	public void addPlayers(){
 		for(int i = 0; i < 2; i++){
-			System.out.println("请输入第" + (i+1) + "名玩家的id：");
+			try {
+				System.out.println("请输入第" + (i+1) + "名玩家的id：");
+			} catch (Exception e) {
+				System.out.println("id必须为数字");
+			}
 			String playerId = in.next();
 			System.out.println("请输入第" + (i+1) + "名玩家的姓名：");
 			String playerName = in.next();
 			Player player = new Player(playerId,playerName);
 			playerList.add(player);
 		}
+		System.out.println("欢迎玩家");
+		for (Player player : playerList) {
+			System.out.print(player.getName() + "、");
+		}
+		System.out.println("进入游戏！");
 	}
 	
 	//把扑克牌打乱
@@ -44,7 +51,7 @@ public class PokerAction {
 		System.out.println("********开始洗牌....*************");
 		//打乱扑克牌顺序
 		Collections.shuffle(cardsList);
-		System.out.println("********洗牌完成，开始发牌***********");
+		System.out.println("********洗牌完成，开始创建玩家***********");
 	}
 	
 	//给玩家发牌
@@ -52,12 +59,13 @@ public class PokerAction {
 		//每名玩家发两张牌
 		for(int j = 0; j < 2; j++){
 			for (Player player : playerList) {
+				System.out.println("    玩家" + player.getName() + "拿牌！");
 				player.getHandCards().add(cardsList.get(0));
 				//每次发完牌都要把第一张移出列表
 				cardsList.remove(0);
 			}
 		}
-		System.out.println("********发牌完成********");
+		System.out.println("********发牌结束********");
 	}
 	
 	//比较两名玩家的牌
@@ -103,7 +111,7 @@ public class PokerAction {
 	//扑克牌信息
 	public void printPoker(List<Poker> pokerList){
 		for (Poker poker : pokerList) {
-			System.out.println(poker.getCard());
+			System.out.println(poker.getColor() + poker.getNum());
 		}
 	}
 }

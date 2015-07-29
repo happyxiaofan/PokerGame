@@ -10,8 +10,6 @@ public class Poker implements Comparable<Poker>{
 	
 	private String num;
 	private String color;
-	
-	private String card;//√ø’≈ ÷≈∆
 
 	private List<Poker> pokerList;
 	public Poker(){
@@ -38,23 +36,7 @@ public class Poker implements Comparable<Poker>{
 		return pokerList;
 	}
 	
-	public String getCard() {
-		return card;
-	}
 
-	public void setCard(String card) {
-		this.card = card;
-	}
-	
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((color == null) ? 0 : color.hashCode());
-		result = prime * result + ((num == null) ? 0 : num.hashCode());
-		return result;
-	}
 
 	
 	@Override
@@ -90,11 +72,9 @@ public class Poker implements Comparable<Poker>{
 	public List<Poker> creatPoker(){
 		for (String color : colors) {
 			for (String number : numbers) {
-				String tmp = card + number;
 				Poker poker = new Poker();
 				poker.setColor(color);
 				poker.setNum(number);
-//				poker.setCard(tmp);
 				pokerList.add(poker);
 			}
 		}
