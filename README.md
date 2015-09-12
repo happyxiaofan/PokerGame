@@ -1,2 +1,2 @@
 ## Poker Game(Easy)
-> a simple poker game without GUI
+一个简易控制台版的扑克牌游戏
